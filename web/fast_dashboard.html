@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Speed System Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0f;
+            --panel-bg: rgba(20, 20, 30, 0.8);
+            --accent-color: #00ffcc;
+            --text-color: #e0e0e0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            background: var(--panel-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-size: 1.2rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        canvas {
+            width: 100%;
+            height: 400px;
+            background: #000;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .perf-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #00ffcc22;
+            color: var(--accent-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="perf-badge">GPU Accelerated</div>
+    
+    <div class="container">
+        <h1>System Performance Visualizer</h1>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="fps-val">0</div>
+                <div class="stat-label">UI Frame Rate (FPS)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="latency-val">0.0</div>
+                <div class="stat-label">Loop Latency (ms)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="freq-val">0</div>
+                <div class="stat-label">Comm Frequency (Hz)</div>
+            </div>
+        </div>
+
+        <canvas id="mainCanvas" width="1000" height="400"></canvas>
+    </div>
+
+    <script src="js/high_speed_canvas.js"></script>
+    <script>
+        const dashboard = new FastDashboard('mainCanvas');
+        
+        // Mock data stream for demonstration
+        let frameCount = 0;
+        let lastTime = performance.now();
+        
+        function updateStats() {
+            const now = performance.now();
+            const delta = now - lastTime;
+            
+            if (delta >= 1000) {
+                document.getElementById('fps-val').innerText = frameCount;
+                frameCount = 0;
+                lastTime = now;
+            }
+            frameCount++;
+            
+            dashboard.addDataPoint(Math.sin(now / 200) * 50 + Math.random() * 20);
+            
+            // Mock random stats
+            if (Math.random() > 0.95) {
+                document.getElementById('latency-val').innerText = (Math.random() * 2 + 0.5).toFixed(2);
+                document.getElementById('freq-val').innerText = (Math.random() * 20 + 80).toFixed(0);
+            }
+
+            requestAnimationFrame(updateStats);
+        }
+        
+        updateStats();
+    </script>
+</body>
+</html>

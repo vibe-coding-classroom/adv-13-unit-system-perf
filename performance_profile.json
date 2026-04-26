@@ -1,0 +1,8 @@
+{
+  "traceEvents": [],
+  "metadata": {
+    "description": "Placeholder for Chrome DevTools Performance Profile. To generate: Open fast_dashboard.html in Chrome, go to DevTools -> Performance -> Record, then Save Profile.",
+    "project": "adv-13-unit-system-perf",
+    "status": "Awaiting student recording"
+  }
+}

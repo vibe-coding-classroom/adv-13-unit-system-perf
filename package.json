@@ -1,0 +1,12 @@
+{
+  "name": "adv-13-unit-system-perf",
+  "version": "1.0.0",
+  "description": "System Performance Analysis Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/performance.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
