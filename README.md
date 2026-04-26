@@ -1,5 +1,3 @@
-Viewed adv-13-unit-system-perf.html:1-393
-
 針對 **`adv-13-unit-system-perf` (系統性能分析)** 單元，這是邁向「全疊堆高級開發者」的最終磨練。它不只要求程式能跑，更要求程式「極致高效」。這涉及到從嵌入式 CPU 的微秒級埋點量測，到通訊協議的二進位壓縮，再到瀏覽器 GPU 的 Canvas 渲染加速。
 
 以下是在 **GitHub Classroom** 部署其作業 (Assignments) 的具體建議：
