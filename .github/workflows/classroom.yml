@@ -13,5 +13,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: education/autograding-grader@v1
+      - uses: education/autograding@v1
         if: always()
